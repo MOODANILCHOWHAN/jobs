@@ -39,9 +39,15 @@ app.use(express.json({ limit: "30mb" }));
 
 app.use("/", router);
 
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDb connected successfully"))
-  .catch((error) => console.log("Failed to connect mongoDB", error));
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log("✅ MongoDB connected");
+  } catch (err) {
+    console.error("❌ MongoDB connection failed:", err.message);
+    process.exit(1); // stop server if DB fails to connect
+  }
+};
 
+connectDB();
 app.listen(PORT, console.log(`server running ${PORT}`));

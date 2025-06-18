@@ -14,15 +14,15 @@ const jobs= {
         res.status(500).json(error);
     }
 },
-getJobs: async(req,resp)=>{
+getJobs: async (req, res) => {
     try {
-        const data= await jobDetail.find();
-        console.log("data",json(data));
-        resp.status(201).json(data);
+      const data = await jobDetail.find(); // this is the issue area
+      console.log("Fetched data:", data);
+      res.status(200).json(data);
     } catch (error) {
-        console.log(error)
-        resp.status(400).json(error)
+      console.error("GET error:", error);
+      res.status(500).json({ error: "Internal Server Error" });
     }
-}
+  }
 }
 export default jobs;
