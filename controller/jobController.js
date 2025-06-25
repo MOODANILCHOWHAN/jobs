@@ -36,6 +36,27 @@ getJobs: async (req, res) => {
     } catch (error) {
       res.status(501).json(error)
     }
+  },
+  getJobByNames: async(req,resp)=>{
+    const allowFileds=['jobName','jobExperience','company','location','interviewType']
+    const {field,value} = req.query;
+
+    if(!allowFileds.includes(field)){
+      return res.status(404).json({message:'invalid field'});
+    }
+
+    try {
+      const query={};
+      query[field]=value;
+      const data = await jobDetail.find(query);
+
+      if(!data){
+        res.status(404).json({message:'no data found'});
+      }
+      res.status(200).json(data);
+    } catch (error) {
+      res.status(500).json(error)
+    }
   }
 }
 export default jobs;
