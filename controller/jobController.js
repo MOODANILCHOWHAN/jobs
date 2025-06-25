@@ -23,6 +23,19 @@ getJobs: async (req, res) => {
       console.error("GET error:", error);
       res.status(500).json({ error: "Internal Server Error" });
     }
+  },
+  getSingleJob: async (req,res)=>{
+    try {
+      const id = req.params.id
+      const data = await jobDetail.findById(id);
+
+      if(!data){
+        return res.status(400).json({message:'no data found for this id'})
+      }
+      res.status(200).json(data);
+    } catch (error) {
+      res.status(501).json(error)
+    }
   }
 }
 export default jobs;
