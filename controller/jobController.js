@@ -37,7 +37,7 @@ getJobs: async (req, res) => {
       res.status(501).json(error)
     }
   },
-  getJobByNames: async(req,resp)=>{
+  getJobByNames: async(req,res)=>{
     const allowFileds=['jobName','jobExperience','company','location','interviewType']
     const {field,value} = req.query;
 
