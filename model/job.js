@@ -1,4 +1,4 @@
-import { type } from "express/lib/response";
+
 import mongoose, { Schema } from "mongoose";
 
 const job = new Schema({
@@ -14,7 +14,7 @@ const job = new Schema({
     link: { type: String, require: true },
     status:{type:Boolean,default:true},
     createdAt:{type:Date,default:Date.now()},
-    image:{type:File,require:false}
+    image:{type:Buffer,require:false}
 });
 
 const jobDetail=mongoose.model('Job',job);

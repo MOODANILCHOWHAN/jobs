@@ -3,9 +3,13 @@ import jobDetail from "../model/job.js";
 const jobs= {
    createJob: async(req,res)=>{
     try {
-        const {jobName,jobExperience,company,description,location,interviewType,link}= req.body;
+        const {  jobName,jobType,city,jobExperience,company,description,location,interviewType,link,
+        status,createdAt}= req.body;
+        const imgBuffer= req.file?req.file.buffer:null;
         const job= new jobDetail(
-            {jobName,jobExperience,company,description,location,interviewType,link}
+            { jobName,jobType,city,jobExperience,company,description,location,interviewType,link,
+              status,createdAt,image:imgBuffer
+            }
         )
         await job.save()
         res.status(201).json(job);
