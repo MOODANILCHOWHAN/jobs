@@ -21,7 +21,7 @@ const jobs= {
 },
 getJobs: async (req, res) => {
     try {
-      const data = await jobDetail.find().sort(-1); // this is the issue area
+      const data = await jobDetail.find().sort({ createdAt: -1 }); // this is the issue area
       console.log("Fetched data:", data);
       res.status(200).json(data);
     } catch (error) {
@@ -53,7 +53,7 @@ getJobs: async (req, res) => {
     try {
       const query={};
       query[field]=value;
-      const data = await jobDetail.find(query).sort(-1);
+      const data = await jobDetail.find(query).sort({ createdAt: -1 });
 
       if(!data){
         res.status(404).json({message:'no data found'});
