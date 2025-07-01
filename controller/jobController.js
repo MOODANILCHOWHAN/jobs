@@ -1,6 +1,6 @@
 import res from "express/lib/response.js";
 import jobDetail from "../model/job.js";
-import { sortData } from "../services/sort.js";
+// import { sortData } from "../services/sort.js";
 const jobs= {
    createJob: async(req,res)=>{
     try {
