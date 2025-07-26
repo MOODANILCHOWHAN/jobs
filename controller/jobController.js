@@ -4,11 +4,11 @@ import jobDetail from "../model/job.js";
 const jobs= {
    createJob: async(req,res)=>{
     try {
-        const {  jobName,jobType,city,jobExperience,company,description,location,interviewType,link,
-        status,createdAt}= req.body;
+        const {  jobName,jobType,city, industryType,jobExperience,company,description,location,interviewType,link,
+        status,createdAt,}= req.body;
         const imgBuffer= req.file?req.file.buffer:null;
         const job= new jobDetail(
-            { jobName,jobType,city,jobExperience,company,description,location,interviewType,link,
+            { jobName,jobType,city,  industryType,jobExperience,company,description,location,interviewType,link,
               status,createdAt,image:imgBuffer
             }
         )
