@@ -5,6 +5,7 @@ const job = new Schema({
 
     jobName: { type: String, required: true },
     jobType:{type:String,required:true},
+    industryType:{type:String,required:true},
     city:{type:String,reuired:true},
     skils:{type:[String],required:true},
     jobExperience: { type: Number, required: true },
