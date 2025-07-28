@@ -18,6 +18,7 @@ const upload = multer({
 router.post('/createJob', upload.single("image"),jobs.createJob);
 router.get('/getAllJobs',jobs.getJobs);
 router.get('/getJob/:id',jobs.getSingleJob);
-router.get('/getByField', jobs.getJobByNames)
+router.get('/getByField', jobs.getJobByNames);
+router.get('/getSuggestions',jobs.getJObsSuggestions);
 
 export default router;
