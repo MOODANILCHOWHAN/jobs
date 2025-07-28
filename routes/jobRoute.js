@@ -1,6 +1,7 @@
 import express from "express";
 import jobs from '../controller/jobController.js'
 import multer from "multer";
+import dump from "../controller/dummpingJobs.js";
 const router = express.Router();
 
 
@@ -20,5 +21,5 @@ router.get('/getAllJobs',jobs.getJobs);
 router.get('/getJob/:id',jobs.getSingleJob);
 router.get('/getByField', jobs.getJobByNames);
 router.get('/getSuggestions/:id',jobs.getJObsSuggestions);
-
+router.post('/dump',dump)
 export default router;
