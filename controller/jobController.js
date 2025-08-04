@@ -85,7 +85,19 @@ const jobs = {
         {$limit:8} 
       ]
       );
-
+      if(suggestionJobs.length<8){
+        const suggestionJOb2 = await jobDetail.aggregate([
+          {
+            $match:{
+              $or:[
+                {company:reffJob.company},
+                {city:reffJob.city}
+              ]
+            }
+          }
+        ])
+        suggestionJobs.push(suggestionJOb2);
+      }
       res.status(200).json(suggestionJobs);
     } catch (error) {
       res.status(500).json({message:error.message})
