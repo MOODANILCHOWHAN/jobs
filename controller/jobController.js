@@ -74,9 +74,11 @@ const jobs = {
       const suggestionJobs= await jobDetail.aggregate([
         {
           $match:{
-            jobExperience:reffJob.jobExperience,
-            jobName:reffJob.jobName,
-            industryType:reffJob.industryType
+            $or :[
+            {jobExperience:reffJob.jobExperience},
+            {jobName:reffJob.jobName},
+            {industryType:reffJob.industryType}
+            ]
           }
         },
         {$sort:{createdAt:-1}},
