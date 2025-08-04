@@ -74,7 +74,6 @@ const jobs = {
       const suggestionJobs= await jobDetail.aggregate([
         {
           $match:{
-            city:reffJob.city,
             jobExperience:reffJob.jobExperience,
             jobName:reffJob.jobName,
             industryType:reffJob.industryType
