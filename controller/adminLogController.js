@@ -1,6 +1,6 @@
-import adminlogIns from "../model/adminLogIn";
-import validatePassword from "../services/logInValidate";
-import { JsonWebTokenError } from "jsonwebtoken";
+import adminlogIns from "../model/adminLogIn.js";
+import validatePassword from "../services/logInValidate.js";
+import jwt from 'jsonwebtoken';
 
 const adminLogInController= async (req,res)=>{
 try {

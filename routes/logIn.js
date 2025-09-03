@@ -1,10 +1,10 @@
 import { Router } from "express";
-import adminLogInController from "../controller/adminLogController";
-import { verifyToken } from "../middleware/verifyToken";
+import adminLogInController from "../controller/adminLogController.js";
+import { verifyToken } from "../middleware/verifyToken.js";
 const logInRouter = Router()
 
-router.post('/logIn',adminLogInController);
-router.get('/demoTest',verifyToken,(req,res)=>{
+logInRouter.post('/logIn',adminLogInController);
+logInRouter.get('/demoTest',verifyToken,(req,res)=>{
     res.json({message:'tokn is there good to go.'})
 })
 
