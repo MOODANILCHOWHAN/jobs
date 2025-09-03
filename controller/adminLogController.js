@@ -1,5 +1,6 @@
 import adminlogIns from "../model/adminLogIn";
-import validate from "../services/logInValidate";
+import validatePassword from "../services/logInValidate";
+import { JsonWebTokenError } from "jsonwebtoken";
 
 const adminLogInController= async (req,res)=>{
 try {
@@ -10,9 +11,10 @@ try {
       }
 
 
-    const validate= validate(password,dbUser.passwor);
+    const validate= validatePassword(password,dbUser.passwor);
     if(validate.status == 201){
-        res.status(validate.status).json({message:validate.message})
+        const jwts=jwt.sign({userId:dbUser._id},process.env.JWT_SECRET,{expiresIn:'1h'})
+        res.status(validate.status).json({token:jwts,message:validate.message})
     }
     else{
         res.status(validate.status).json({message:validate.message});
