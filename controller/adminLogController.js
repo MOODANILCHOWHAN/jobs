@@ -13,7 +13,7 @@ const adminLogInController = async (req, res) => {
 
     const validate = validatePassword(password, dbUser.password);
 
-    if (validate.status === 200) {
+    if (validate.status === 201) {
       const token = jwt.sign(
         { userId: dbUser._id },
         process.env.JWT_SECRET,
