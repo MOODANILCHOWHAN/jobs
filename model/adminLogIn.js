@@ -7,5 +7,5 @@ const adminLogIn = new Schema( {
     password:{type:String,required:true}
 })
 
-const adminlogIns= mongoose.model('adminLogIn',adminLogIn);
-export default adminlogIns;
+const adminlogIn= mongoose.model('adminLogIn',adminLogIn);
+export default adminlogIn;

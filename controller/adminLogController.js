@@ -1,11 +1,11 @@
-import adminlogIns from "../model/adminLogIn.js";
+import adminlogIn from "../model/adminLogIn.js";
 import validatePassword from "../services/logInValidate.js";
 import jwt from 'jsonwebtoken';
 
 const adminLogInController= async (req,res)=>{
 try {
     const { emailId, password } = req.body;
-    const dbUser= await adminlogIns.findOne({ email: emailId });
+    const dbUser= await adminlogIn.findOne({ email: emailId });
     if (!dbUser) {
         return res.status(404).json({ message: "Invalid email ID" });
       }
