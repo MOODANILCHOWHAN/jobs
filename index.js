@@ -29,6 +29,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import router from "./routes/jobRoute.js";
 import cors from "cors";
+import logInRouter from "./routes/logIn.js";
 
 dotenv.config();
 
@@ -38,6 +39,7 @@ app.use(cors());
 app.use(express.json({ limit: "30mb" }));
 
 app.use("/", router);
+app.use("/auth",logInRouter)
 
 const connectDB = async () => {
   try {
