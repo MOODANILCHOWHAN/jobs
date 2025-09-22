@@ -39,6 +39,9 @@ app.use(cors());
 app.use(express.json({ limit: "30mb" }));
 
 app.use("/", router);
+app.use("/test",(req,res)=>{
+  res.send("Server is running fine.")
+})
 app.use("/auth",logInRouter)
 
 const connectDB = async () => {

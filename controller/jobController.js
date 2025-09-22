@@ -1,6 +1,6 @@
 import res from "express/lib/response.js";
 import jobDetail from "../model/job.js";
-// import { sortData } from "../services/sort.js";
+import { sortData } from "../services/sort.js";
 const jobs = {
   createJob: async (req, res) => {
     try {
@@ -22,8 +22,10 @@ const jobs = {
   },
   getJobs: async (req, res) => {
     try {
-      const data = await jobDetail.find().sort({ createdAt: -1 }); // this is the issue area
-      console.log("Fetched data:", data);
+      const pageNu= req.params.page
+      const dataDB = await jobDetail.find().sort({ createdAt: -1 }); // this is the issue area
+      // console.log("Fetched data:", data);
+      const data= sortData(dataDB,pageNu);
       res.status(200).json(data);
     } catch (error) {
       console.error("GET error:", error);
