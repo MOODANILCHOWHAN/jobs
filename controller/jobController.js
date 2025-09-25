@@ -26,7 +26,7 @@ const jobs = {
       const dataDB = await jobDetail.find().sort({ createdAt: -1 }); // this is the issue area
       // console.log("Fetched data:", data);
       const data= sortData(dataDB,pageNu);
-      res.status(200).json(data);
+      res.status(200).json({jobs:data,totalJObs:dataDB.length});
     } catch (error) {
       console.error("GET error:", error);
       res.status(500).json({ error: "Internal Server Error" });
@@ -73,6 +73,7 @@ const jobs = {
       if(!reffJob){
         return res.status(204).json({message:'Job reference was not found.'})
       }
+      
       const suggestionJobs= await jobDetail.aggregate([
         {
           $match:{
@@ -82,9 +83,7 @@ const jobs = {
             {industryType:reffJob.industryType}
             ]
           }
-        },
-        {$sort:{createdAt:-1}},
-        {$limit:8} 
+        } 
       ]
       );
       if(suggestionJobs.length<8){
@@ -100,7 +99,7 @@ const jobs = {
         ])
         suggestionJobs.push(suggestionJOb2);
       }
-      res.status(200).json(suggestionJobs);
+      res.status(200).json(suggestionJobs.slice(0,8));
     } catch (error) {
       res.status(500).json({message:error.message})
     }
