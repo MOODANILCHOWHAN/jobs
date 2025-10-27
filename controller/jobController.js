@@ -66,6 +66,24 @@ const jobs = {
       res.status(500).json(error)
     }
   },
+  getJobByIndusty:async(req,res)=>{
+    try {
+      let industryTypes = req.params.industry;
+      industryTypes=industryTypes.toUpperCase();
+      console.log(industryTypes)
+      let data = await jobDetail.find( { industryType:  industryTypes}).sort({ createdAT: -1 });
+      console.log(data)
+      data = data.slice(0, 2); // safer than splice
+  
+      if (data.length === 0) {
+        return res.status(204).json({ message: 'No jobs are found.' });
+      }
+  
+      res.status(200).json({ jobs: data });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
   getJObsSuggestions: async (req,res)=>{
     try {
       const reffJobId=req.params.id;
@@ -78,7 +96,7 @@ const jobs = {
         {
           $match:{
             $or :[
-            {jobExperience:reffJob.jobExperience},
+            // {jobExperience:reffJob.jobExperience},
             {jobName:reffJob.jobName},
             {industryType:reffJob.industryType}
             ]
@@ -91,8 +109,7 @@ const jobs = {
           {
             $match:{
               $or:[
-                {company:reffJob.company},
-                {city:reffJob.city}
+                {company:reffJob.company}
               ]
             }
           }

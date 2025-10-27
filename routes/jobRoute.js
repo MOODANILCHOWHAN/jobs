@@ -21,5 +21,6 @@ router.get('/getAllJobs/:page',jobs.getJobs);
 router.get('/getJob/:id',jobs.getSingleJob);
 router.get('/getByField', jobs.getJobByNames);
 router.get('/getSuggestions/:id',jobs.getJObsSuggestions);
-router.post('/dump',dump)
+router.get('/getJobByInd/:industry', jobs.getJobByIndusty);
+router.post('/dump',dump);
 export default router;
