@@ -73,7 +73,7 @@ const jobs = {
       console.log(industryTypes)
       let data = await jobDetail.find( { industryType:  industryTypes}).sort({ createdAT: -1 });
       console.log(data)
-      data = data.slice(0, 2); // safer than splice
+      data = data.slice(0, 3); // safer than splice
   
       if (data.length === 0) {
         return res.status(204).json({ message: 'No jobs are found.' });
