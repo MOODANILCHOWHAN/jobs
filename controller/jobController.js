@@ -38,7 +38,7 @@ const jobs = {
       const dataDB = await jobDetail.find(query).sort({ createdAt: -1 }).skip(skip).limit(limit);;
   
       // const data = sortData(dataDB, page); // assuming this paginates correctly
-      res.status(200).json({ jobs: data, totalJobs: dataDB.length });
+      res.status(200).json({ jobs: dataDB, totalJobs: dataDB.length });
     } catch (error) {
       console.error("GET error:", error);
       res.status(500).json({ error: "Internal Server Error" });
