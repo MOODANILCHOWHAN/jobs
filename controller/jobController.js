@@ -22,11 +22,23 @@ const jobs = {
   },
   getJobs: async (req, res) => {
     try {
-      const pageNu= req.params.page
-      const dataDB = await jobDetail.find().sort({ createdAt: -1 }); // this is the issue area
-      // console.log("Fetched data:", data);
-      const data= sortData(dataDB,pageNu);
-      res.status(200).json({jobs:data,totalJObs:dataDB.length});
+      const { page = 1, company, location, jobName, industryType } = req.query;
+  
+      // Build dynamic OR query
+      const orConditions = [];
+      if (company) orConditions.push({ company: { $regex: company, $options: 'i' } });
+      if (location) orConditions.push({ location: { $regex: location, $options: 'i' } });
+      if (jobName) orConditions.push({ jobName: { $regex: jobName, $options: 'i' } });
+      if (industryType) orConditions.push({ industryType: { $regex: industryType, $options: 'i' } });
+  
+      const query = orConditions.length > 0 ? { $or: orConditions } : {};
+  
+      const limit = 10;
+      const skip = (page - 1) * limit;
+      const dataDB = await jobDetail.find(query).sort({ createdAt: -1 }).skip(skip).limit(limit);;
+  
+      // const data = sortData(dataDB, page); // assuming this paginates correctly
+      res.status(200).json({ jobs: data, totalJobs: dataDB.length });
     } catch (error) {
       console.error("GET error:", error);
       res.status(500).json({ error: "Internal Server Error" });

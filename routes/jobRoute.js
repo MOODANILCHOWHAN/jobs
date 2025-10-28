@@ -17,7 +17,7 @@ const upload = multer({
   });
 
 router.post('/createJob', upload.single("image"),jobs.createJob);
-router.get('/getAllJobs/:page',jobs.getJobs);
+router.get('/getAllJobs',jobs.getJobs);
 router.get('/getJob/:id',jobs.getSingleJob);
 router.get('/getByField', jobs.getJobByNames);
 router.get('/getSuggestions/:id',jobs.getJObsSuggestions);
