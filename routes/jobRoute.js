@@ -2,6 +2,7 @@ import express from "express";
 import jobs from '../controller/jobController.js'
 import multer from "multer";
 import dump from "../controller/dummpingJobs.js";
+import skillRouter from "../api/skills/skillRouter.js";
 const router = express.Router();
 
 
@@ -23,4 +24,5 @@ router.get('/getByField', jobs.getJobByNames);
 router.get('/getSuggestions/:id',jobs.getJObsSuggestions);
 router.get('/getJobByInd/:industry', jobs.getJobByIndusty);
 router.post('/dump',dump);
+router.use('/skills',skillRouter);
 export default router;

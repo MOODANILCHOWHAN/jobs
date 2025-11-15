@@ -42,7 +42,7 @@ app.use("/", router);
 app.use("/test",(req,res)=>{
   res.send("Server is running fine.")
 })
-app.use("/auth",logInRouter)
+app.use("/auth",logInRouter);
 
 const connectDB = async () => {
   try {
