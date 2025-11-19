@@ -1,7 +1,7 @@
-import { Schema} from "mongoose";
+import { Schema,mongoose} from "mongoose";
 
 const skillsSchema = new Schema({
-    name:{String,requied:true}
+    name:{type:String,requied:true}
 })
 
 const skill= mongoose.model('skills',skillsSchema);

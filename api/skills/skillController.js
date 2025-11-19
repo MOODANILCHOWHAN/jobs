@@ -1,4 +1,4 @@
-import skill from "./skillModel";
+import skill from "./skillModel.js";
 
 const skillController = {
     addSkills: async (req, res) => {

@@ -1,5 +1,5 @@
 import {Router} from "express";
-import skillController from "./skillController";
+import skillController from "./skillController.js";
 
 const skillRouter=Router();
 
