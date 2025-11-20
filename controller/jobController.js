@@ -6,7 +6,7 @@ const jobs = {
     try {
       const { jobName, jobType, city, industryType, jobExperience, company, description, location, interviewType, link,
         status, createdAt, skils} = req.body;
-      const parsedSkill= skils ? JSON.parse(skill) : [];
+      const parsedSkill= skils ? JSON.parse(skils) : [];
       const imgBuffer = req.file ? req.file.buffer : null;
       const job = new jobDetail(
         {
