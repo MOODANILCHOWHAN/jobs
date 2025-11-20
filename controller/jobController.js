@@ -5,12 +5,13 @@ const jobs = {
   createJob: async (req, res) => {
     try {
       const { jobName, jobType, city, industryType, jobExperience, company, description, location, interviewType, link,
-        status, createdAt, } = req.body;
+        status, createdAt, skils} = req.body;
+      const parsedSkill= skill ? JSON.parse(skill) : [];
       const imgBuffer = req.file ? req.file.buffer : null;
       const job = new jobDetail(
         {
           jobName, jobType, city, industryType, jobExperience, company, description, location, interviewType, link,
-          status, createdAt, image: imgBuffer
+          status, createdAt, image: imgBuffer,skils:parsedSkill
         }
       )
       await job.save()
