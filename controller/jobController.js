@@ -1,9 +1,12 @@
 import res from "express/lib/response.js";
 import jobDetail from "../model/job.js";
 import { sortData } from "../services/sort.js";
+import { jobsValidator } from "../validators/jobsValidators.js";
+import {ValidationError} from 'joi';
 const jobs = {
   createJob: async (req, res) => {
     try {
+      await jobsValidator.validateAsync(req.body);
       const { jobName, jobType, city, industryType, jobExperience, company, description, location, interviewType, link,
         status, createdAt, skils} = req.body;
       const parsedSkill= skils ? JSON.parse(skils) : [];
@@ -17,6 +20,9 @@ const jobs = {
       await job.save()
       res.status(201).json(job);
     } catch (error) {
+      if(error instanceof ValidationError){
+        res.status(400).send({error:error});
+      }
       console.log(error);
       res.status(500).json(error);
     }
