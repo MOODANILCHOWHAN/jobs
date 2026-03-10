@@ -2,7 +2,10 @@ import res from "express/lib/response.js";
 import jobDetail from "../model/job.js";
 import { sortData } from "../services/sort.js";
 import { jobsValidator } from "../validators/jobsValidators.js";
-import {ValidationError} from 'joi';
+import Joi from 'joi';
+
+const { ValidationError } = Joi;
+
 const jobs = {
   createJob: async (req, res) => {
     try {
